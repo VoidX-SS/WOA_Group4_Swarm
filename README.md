@@ -33,28 +33,50 @@ $$\mathbf{X} = [x_1, y_1, e_1, x_2, y_2, e_2, \dots, x_{10}, y_{10}, e_{10}]$$
 * Mức pin đề xuất $e_k \in [0, 25]$: trong bản cơ sở, tối đa 10 đèn cùng phát; ở ngách giới hạn $K \in \{6, 8, 10\}$, chỉ giữ lại $K$ đèn có mức pin đề xuất cao nhất, các đèn còn lại tắt ($\tilde{e}_k = 0$) nhưng vị trí đó vẫn là điểm trung gian trên đường bay.
 
 ### Năng lượng, tín hiệu và hàm mục tiêu
-* **Túi pin chung $220$:** Tổng chiều dài $L$ qua 11 đoạn thẳng tiêu tốn $E_{\text{bay}} = 0.45 \times L$; các đèn bật tiêu tốn $E_{\text{den}} = \sum_{k=1}^{10} \tilde{e}_k$. Phương án hợp lệ phải thỏa $E_{\text{tong}} = E_{\text{bay}} + E_{\text{den}} \le 220$.
+* **Túi pin chung 220:** Tổng chiều dài $L$ qua 11 đoạn thẳng tiêu tốn năng lượng bay $E_{\text{bay}} = 0.45 \times L$. Các đèn bật tiêu tốn năng lượng phát:
+
+$$
+E_{\text{den}} = \sum_{k=1}^{10} \tilde{e}_k
+$$
+
+Phương án hợp lệ phải thỏa mãn tổng năng lượng trong giới hạn túi pin:
+
+$$
+E_{\text{tong}} = E_{\text{bay}} + E_{\text{den}} \le 220
+$$
+
 * **Tín hiệu và độ hữu dụng bão hòa:** Trại $m$ nhận tín hiệu cộng dồn từ mọi đèn đang bật theo thang khoảng cách đặc trưng $18$:
 
-  $$I_m = \sum_{k=1}^{10} \frac{\tilde{e}_k}{1 + \frac{d_{km}^2}{18^2}}, \qquad u_m = 1 - e^{-0.1 \times I_m}$$
+$$
+I_m = \sum_{k=1}^{10} \frac{\tilde{e}_k}{1 + \frac{d_{km}^2}{18^2}}, \qquad u_m = 1 - e^{-0.1 \times I_m}
+$$
 
-  Chỉ số toàn hệ thống là trung bình có trọng số $U = \frac{\sum_{m=1}^{8} w_m u_m}{\sum_{m=1}^{8} w_m} \in [0, 1)$, đi kèm $u_{\min} = \min_{m=1..8} u_m$ để theo dõi mức phục vụ của trại thiệt thòi nhất.
+Chỉ số toàn hệ thống là trung bình có trọng số $U \in [0, 1)$, đi kèm mức phục vụ của trại thiệt thòi nhất $u_{\min}$:
+
+$$
+U = \frac{\sum_{m=1}^{8} w_m u_m}{\sum_{m=1}^{8} w_m}, \qquad u_{\min} = \min_{m=1..8} u_m
+$$
+
 * **Hàm mục tiêu cần cực tiểu hóa:**
 
-  $$\text{base} = -U + 0.12 \times \frac{L}{100}$$
+$$
+\text{base} = -U + 0.12 \times \frac{L}{100}
+$$
 
-  $$J = \text{base} + 100 \cdot \text{collision} + 30 \cdot \text{over\_pin}^2 + 100 \cdot \text{outside\_map}$$
+$$
+J = \text{base} + 100 \cdot \text{collision} + 30 \cdot (\text{over\textunderscore pin})^2 + 100 \cdot \text{outside\textunderscore map}
+$$
 
 * **Ba sổ ghi (không sửa nghiệm hậu kiểm):**
   * `best_overall`: lưu cá voi có $J$ thấp nhất để dẫn dắt cả đàn.
   * `best_valid`: lưu nghiệm hợp lệ (không lấn bão, không vượt pin, nằm trong bản đồ) có $\text{base}$ thấp nhất.
-  * `best_gate`: lưu nghiệm hợp lệ từng đi qua cổng khe $x = 40, y \in [47, 53]$ để kiểm tra riêng trên Ca B.
+  * `best_gate`: lưu nghiệm hợp lệ từng đi qua cổng khe $x = 40, y \in [38, 62]$ để kiểm tra riêng trên Ca B.
 
 ### Ba kịch bản bản đồ (`data/`)
 | Ký hiệu | File dữ liệu | Đặc điểm địa hình |
 | :--- | :--- | :--- |
 | **Ca A** | `data/co_ban.json` | Bản đồ cơ bản với 3 vùng bão bố trí mở |
-| **Ca B** | `data/khe_hep.json` | Hai vùng bão tạo khe hẹp tại cổng $x = 40, y \in [47, 53]$ (vẫn cho phép đi vòng ngoài) |
+| **Ca B** | `data/khe_hep.json` | Hai vùng bão tạo khe hẹp tại cổng $x = 40, y \in [38, 62]$ (vẫn cho phép đi vòng ngoài) |
 | **Ca C** | `data/chan_duong.json` | Ba vùng bão chắn ngang trục đường chính từ $S$ đến $T$ |
 
 ---
