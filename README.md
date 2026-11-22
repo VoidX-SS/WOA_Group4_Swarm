@@ -1,4 +1,4 @@
-﻿# Đom Đóm — Cài Đặt Và Đối Chứng Thuật Toán Tối Ưu Hóa Bầy Cá Voi (WOA)
+﻿# Đom Đóm — Cài Đặt Và Đối Chứng Thuật Toán Tối Ưu Hóa Bầy Cá Voi (UAV)
 
 > **Nhóm 4** · Nghiên cứu cơ chế tìm kiếm, cài đặt bám sát mã tác giả (Mirjalili & Lewis, 2016) và kiểm chứng thực nghiệm trên bài toán định tuyến UAV kết hợp phân bổ pin phát tín hiệu.
 
@@ -33,7 +33,7 @@ $$\mathbf{X} = [x_1, y_1, e_1, x_2, y_2, e_2, \dots, x_{10}, y_{10}, e_{10}]$$
 * Mức pin đề xuất $e_k \in [0, 25]$: trong bản cơ sở, tối đa 10 đèn cùng phát; ở ngách giới hạn $K \in \{6, 8, 10\}$, chỉ giữ lại $K$ đèn có mức pin đề xuất cao nhất, các đèn còn lại tắt ($\tilde{e}_k = 0$) nhưng vị trí đó vẫn là điểm trung gian trên đường bay.
 
 ### Năng lượng, tín hiệu và hàm mục tiêu
-* **Túi pin chung $220$:** Tổng chiều dài $L$ qua 11 đoạn thẳng tiêu tốn $E_{\text{bay}} = 0.45 \times L$; các đèn bật tiêu tốn $E_{\text{đèn}} = \sum_{k=1}^{10} \tilde{e}_k$. Phương án hợp lệ phải thỏa $E_{\text{tổng}} = E_{\text{bay}} + E_{\text{đèn}} \le 220$.
+* **Túi pin chung $220$:** Tổng chiều dài $L$ qua 11 đoạn thẳng tiêu tốn $E_{\text{bay}} = 0.45 \times L$; các đèn bật tiêu tốn $E_{\text{den}} = \sum_{k=1}^{10} \tilde{e}_k$. Phương án hợp lệ phải thỏa $E_{\text{tong}} = E_{\text{bay}} + E_{\text{den}} \le 220$.
 * **Tín hiệu và độ hữu dụng bão hòa:** Trại $m$ nhận tín hiệu cộng dồn từ mọi đèn đang bật theo thang khoảng cách đặc trưng $18$:
 
   $$I_m = \sum_{k=1}^{10} \frac{\tilde{e}_k}{1 + \frac{d_{km}^2}{18^2}}, \qquad u_m = 1 - e^{-0.1 \times I_m}$$
