@@ -6,7 +6,7 @@ Một trại đang rất thiếu tín hiệu sẽ quý một ít pin thêm hơn 
 
 import math
 
-
+# V(over)
 def energy_metrics(length, beacons, problem):
     flight = problem["flight_cost"] * length
     lamps = 0
@@ -16,7 +16,7 @@ def energy_metrics(length, beacons, problem):
     over = max(0, total - problem["budget"]) / problem["budget"]
     return {"flight": flight, "lamps": lamps, "total": total, "over": over}
 
-
+# Ikm
 def signal_metrics(beacons, problem):
     levels = []
     satisfaction = []
@@ -29,15 +29,15 @@ def signal_metrics(beacons, problem):
         for beacon in beacons:
             dx = beacon["x"] - camp["x"]
             dy = beacon["y"] - camp["y"]
-            level += beacon["energy"] / (1 + (dx * dx + dy * dy) / range_squared)
-        linear = problem["alpha"] * level
-        sat = 1 - math.exp(-linear)
+            level += beacon["energy"] / (1 + (dx * dx + dy * dy) / range_squared) #Ikm
+        linear = problem["alpha"] * level # first * alpha
+        sat = 1 - math.exp(-linear) # Um
         levels.append(level)
         satisfaction.append(sat)
         weighted_sat += camp["weight"] * sat
         weight_sum += camp["weight"]
 
-    utility_sat = weighted_sat / weight_sum
+    utility_sat = weighted_sat / weight_sum # U_overall
     return {
         "levels": levels,
         "satisfaction": satisfaction,

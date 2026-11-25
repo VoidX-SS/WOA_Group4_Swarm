@@ -1,4 +1,4 @@
-﻿# Đom Đóm — Cài Đặt Và Đối Chứng Thuật Toán Tối Ưu Hóa Bầy Cá Voi (UAV)
+﻿# Bài toán UAV: Cài Đặt Và Đối Chứng Thuật Toán Tối Ưu Hóa Bầy Cá Voi (WOA)
 
 > **Nhóm 4** · Nghiên cứu cơ chế tìm kiếm, cài đặt bám sát mã tác giả (Mirjalili & Lewis, 2016) và kiểm chứng thực nghiệm trên bài toán định tuyến UAV kết hợp phân bổ pin phát tín hiệu.
 
@@ -6,7 +6,7 @@
 
 ## 1. Mở nhanh kết quả và giao diện
 
-* **Xem ngay kết quả đã chạy:** Mở file `MO_KET_QUA.html` bằng trình duyệt web. Toàn bộ bảng số liệu và 17 ảnh phân tích độ phân giải `1920 × 1080` nằm sẵn trong `results/figures/` (trong đó 6 ảnh `*_ONE_SHOT.png` tóm tắt 6 đối chứng của 4 ngách).
+* **Xem ngay kết quả đã chạy:** Mở file `MO_KET_QUA.html` bằng trình duyệt web. Toàn bộ bảng số liệu và 16 ảnh phân tích độ phân giải `1920 × 1080` nằm sẵn trong `results/figures/` (trong đó 6 ảnh `*_ONE_SHOT.png` tóm tắt 6 đối chứng của 4 ngách).
 * **Chạy giao diện điều khiển trên máy cá nhân (Streamlit):**
 
       python -m pip install -r requirements.txt
@@ -20,10 +20,10 @@
 
 ---
 
-## 2. Phát biểu bài toán Đom Đóm
+## 2. Phát biểu bài toán UAV
 
 ### Không gian tìm kiếm (30 biến)
-Trên bản đồ 2D kích thước $100 \times 100$, UAV xuất phát từ $S(0, 50)$, bay qua 10 điểm trung gian $(x_k, y_k)$ và kết thúc tại $T(100, 50)$ để vận hành các thiết bị phát tín hiệu (**đèn đom đóm**) hỗ trợ 8 trại có trọng số nhu cầu $w_m$ khác nhau, đồng thời tránh 3 vùng bão hình tròn với biên an toàn 2 đơn vị.
+Trên bản đồ 2D kích thước $100 \times 100$, UAV xuất phát từ $S(0, 50)$, bay qua 10 điểm trung gian $(x_k, y_k)$ và kết thúc tại $T(100, 50)$ để vận hành các thiết bị phát tín hiệu hỗ trợ 8 trại có trọng số nhu cầu $w_m$ khác nhau, đồng thời tránh 3 vùng bão hình tròn với biên an toàn 2 đơn vị.
 
 Mỗi cá voi trong quần thể là một vector gồm **30 biến số thực**:
 
@@ -98,29 +98,22 @@ Cấu hình cơ sở đặt $N = 30$, $T = 800$ ($24.000$ lượt chấm/seed), 
 
 ---
 
-## 4. Tổng hợp kết quả thực nghiệm (420 lượt chạy)
+## 4. Tổng hợp kết quả thực nghiệm (330 lượt chạy)
 
-### A. Kiểm chuẩn hàm chuẩn 30 chiều (`results/benchmark_summary.csv`, $N = 30, T = 500$)
-| Hàm kiểm chuẩn | Số seed | Số lượt đạt ngưỡng | Giá trị tốt nhất (`mean ± std`) |
-| :--- | :---: | :---: | :---: |
-| **Sphere (30D)** | 30 | **30 / 30** | $3.18 \times 10^{-74} \pm 9.14 \times 10^{-74}$ |
-| **Quadratic (30D)** | 30 | **30 / 30** | $1.21 \times 10^{-14} \pm 3.36 \times 10^{-14}$ |
-| **Rastrigin (30D)** | 30 | **30 / 30** | $5.92 \times 10^{-17} \pm 3.24 \times 10^{-16}$ |
-
-### B. Kết quả trên bài toán Đom Đóm (`results/summary.csv`, $N = 30, T = 800$, 30 seed/cấu hình)
+### Kết quả trên bài toán UAV (`results/summary.csv`, $N = 30, T = 800$, 30 seed/cấu hình)
 | Cấu hình | Hợp lệ (`valid_n`) | `best_overall` hợp lệ | Qua khe B (`gate_found`) | Utility $U$ (`mean ± std`) | Phục vụ tối thiểu $u_{\min}$ | Điểm gốc `base` (`mean ± std`) |
 | :--- | :---: | :---: | :---: | :---: | :---: | :---: |
-| **Ca A — Cơ sở (`A_goc`)** | 29/30 | 0/30 | — | $0.659 \pm 0.141$ | $0.409 \pm 0.125$ | $-0.364 \pm 0.157$ |
-| **Ca A — $l$ độc lập (`A_l_independent`)** | **30/30** | **8/30** | — | $0.790 \pm 0.108$ | $0.582 \pm 0.142$ | **$-0.583 \pm 0.141$** |
-| **Ca A — Sửa biên `re-init` (`A_reinit`)** | **30/30** | 0/30 | — | **$0.823 \pm 0.046$** | **$0.612 \pm 0.075$** | $-0.553 \pm 0.074$ |
-| **Ca A — Tối đa 6 đèn (`A_den_6`)** | 29/30 | 2/30 | — | $0.722 \pm 0.109$ | $0.456 \pm 0.118$ | $-0.461 \pm 0.167$ |
-| **Ca A — Tối đa 8 đèn (`A_den_8`)** | 29/30 | 0/30 | — | $0.636 \pm 0.171$ | $0.390 \pm 0.148$ | $-0.342 \pm 0.205$ |
-| **Ca B — Cơ sở (`B_goc`)** | 30/30 | 5/30 | 2/30 | $0.558 \pm 0.183$ | $0.336 \pm 0.166$ | $-0.305 \pm 0.176$ |
-| **Ca B — $l$ độc lập (`B_l_independent`)** | 30/30 | 1/30 | 2/30 | $0.693 \pm 0.108$ | $0.450 \pm 0.111$ | **$-0.466 \pm 0.114$** |
-| **Ca B — Sửa biên `re-init` (`B_reinit`)** | 26/30 | 2/30 | **5/30** | **$0.708 \pm 0.115$** | **$0.463 \pm 0.124$** | $-0.414 \pm 0.159$ |
-| **Ca B — Lịch $a$ `cosine` (`B_a_cosine`)** | 30/30 | 4/30 | 1/30 | $0.555 \pm 0.135$ | $0.318 \pm 0.111$ | $-0.304 \pm 0.130$ |
-| **Ca B — Lịch $a$ `quadratic` (`B_a_quadratic`)** | 30/30 | 8/30 | 4/30 | $0.546 \pm 0.140$ | $0.313 \pm 0.111$ | $-0.282 \pm 0.120$ |
-| **Ca C — Cơ sở (`C_goc`)** | 29/30 | 6/30 | — | $0.647 \pm 0.123$ | $0.401 \pm 0.118$ | $-0.377 \pm 0.130$ |
+| **Ca A - Cơ sở (`A_goc`)** | 29/30 | 0/30 | - | $0.659 \pm 0.141$ | $0.409 \pm 0.125$ | $-0.364 \pm 0.157$ |
+| **Ca A - $l$ độc lập (`A_l_independent`)** | **30/30** | **8/30** | - | $0.790 \pm 0.108$ | $0.582 \pm 0.142$ | **$-0.583 \pm 0.141$** |
+| **Ca A - Sửa biên `re-init` (`A_reinit`)** | **30/30** | 0/30 | - | **$0.823 \pm 0.046$** | **$0.612 \pm 0.075$** | $-0.553 \pm 0.074$ |
+| **Ca A - Tối đa 6 đèn (`A_den_6`)** | 29/30 | 2/30 | - | $0.722 \pm 0.109$ | $0.456 \pm 0.118$ | $-0.461 \pm 0.167$ |
+| **Ca A - Tối đa 8 đèn (`A_den_8`)** | 29/30 | 0/30 | - | $0.636 \pm 0.171$ | $0.390 \pm 0.148$ | $-0.342 \pm 0.205$ |
+| **Ca B - Cơ sở (`B_goc`)** | 30/30 | 5/30 | 2/30 | $0.558 \pm 0.183$ | $0.336 \pm 0.166$ | $-0.305 \pm 0.176$ |
+| **Ca B - $l$ độc lập (`B_l_independent`)** | 30/30 | 1/30 | 2/30 | $0.693 \pm 0.108$ | $0.450 \pm 0.111$ | **$-0.466 \pm 0.114$** |
+| **Ca B - Sửa biên `re-init` (`B_reinit`)** | 26/30 | 2/30 | **5/30** | **$0.708 \pm 0.115$** | **$0.463 \pm 0.124$** | $-0.414 \pm 0.159$ |
+| **Ca B - Lịch $a$ `cosine` (`B_a_cosine`)** | 30/30 | 4/30 | 1/30 | $0.555 \pm 0.135$ | $0.318 \pm 0.111$ | $-0.304 \pm 0.130$ |
+| **Ca B - Lịch $a$ `quadratic` (`B_a_quadratic`)** | 30/30 | 8/30 | 4/30 | $0.546 \pm 0.140$ | $0.313 \pm 0.111$ | $-0.282 \pm 0.120$ |
+| **Ca C - Cơ sở (`C_goc`)** | 29/30 | 6/30 | - | $0.647 \pm 0.123$ | $0.401 \pm 0.118$ | $-0.377 \pm 0.130$ |
 
 **Ghi nhận chính từ bảng số liệu:**
 * Tách riêng hệ số $l$ theo từng chiều nâng mức hữu dụng trung bình từ $0.659$ lên $0.790$ ở Ca A và từ $0.558$ lên $0.693$ ở Ca B, nhưng trên Ca B số seed đi qua khe vẫn giữ ở mức $2/30$.
@@ -136,22 +129,24 @@ Cấu hình cơ sở đặt $N = 30$, $T = 800$ ($24.000$ lượt chấm/seed), 
     ├── app.py                          # Giao diện web Streamlit chạy trên máy cá nhân
     ├── demo_colab.ipynb                # Notebook tương tác ipywidgets chạy trên Google Colab
     ├── run_demo.py                     # Chạy nhanh một kịch bản từ dòng lệnh
-    ├── run_experiments.py              # Chạy lại toàn bộ 330 lượt ứng dụng + 90 lượt benchmark
+    ├── run_experiments.py              # Chạy lại toàn bộ 330 lượt thực nghiệm bài toán UAV
     ├── tao_bao_cao.py                  # Dựng bộ ảnh 1920×1080 và báo cáo từ results/
     ├── kiem_tra.py                     # Bộ kiểm thử đơn vị cho hình học, năng lượng, lõi WOA và UI
     ├── kiem_tra_ket_qua.py             # Chấm lại và đối chiếu độc lập toàn bộ dữ liệu trong results/
     ├── MO_KET_QUA.html                 # Trang tổng hợp kết quả mở bằng trình duyệt
     ├── data/                           # 3 bản đồ: co_ban.json, khe_hep.json, chan_duong.json
     ├── docs/                           # Tài liệu đề bài, bốn ngách, phân công và kiểm định
+    ├── Extra/                          # Thử nghiệm mở rộng cá nhân và lưu trữ kiểm chuẩn phụ
     ├── phan_cong/                      # Thư mục nhiệm vụ chi tiết của 11 thành viên (00..10)
     ├── src/                            # 10 module mã nguồn (n1_... đến n10_...)
-    ├── results/                        # Kết quả CSV, JSON từng seed, replay ca gốc và 17 ảnh figures/
+    ├── results/                        # Kết quả CSV, JSON từng seed, replay ca gốc và 16 ảnh figures/
     └── tests/                          # Bộ kiểm thử dữ liệu và cấu hình
 
 Lệnh kiểm tra toàn bộ logic và tái lập dữ liệu thực nghiệm:
 
     python kiem_tra.py
     python kiem_tra_ket_qua.py
+    python -m unittest discover -s tests -v
     python run_experiments.py --output results/chay_lai
     python tao_bao_cao.py
 
@@ -164,13 +159,13 @@ Lệnh kiểm tra toàn bộ logic và tái lập dữ liệu thực nghiệm:
 | **S0** | **Minh Nhân** | Chốt đề bài, đối chiếu mã tác giả, kiểm định độc lập, ghép nhánh và chốt phạm vi kết luận |
 | **N1** | **Hoàng Tuấn** | Hình học đoạn thẳng–vùng bão, độ dài đường bay (`src/n1_hoang_tuan_hinh_hoc.py`) |
 | **N2** | **Quốc Phong** | Tiêu hao pin bay/đèn, tín hiệu và utility bão hòa (`src/n2_quoc_phong_nang_luong.py`) |
-| **N3** | **Phúc Khang** | Hàm đánh giá `evaluate()`, kiểm tra hợp lệ và benchmark (`src/n3_phuc_khang_danh_gia.py`) |
+| **N3** | **Phúc Khang** | Hàm đánh giá `evaluate()`, kiểm tra hợp lệ và đối chiếu độc lập (`src/n3_phuc_khang_danh_gia.py`) |
 | **N4** | **Hoàng Yến** | Dữ liệu 3 bản đồ, giải mã 30 biến, lịch tham số $a$ (`src/n4_hoang_yen_du_lieu.py`) |
 | **N5** | **Quỳnh Ngân** | Cập nhật vị trí 3 nhánh WOA, ngách $l$ và xử lý biên (`src/n5_quynh_ngan_buoc_woa.py`) |
 | **N6** | **Vân Lâm** | Vòng lặp chính, quản lý 3 sổ ghi, snapshot đàn và kiểm chứng $K=6 \to K=10$ (`src/n6_van_lam_woa.py`) |
 | **N7** | **Ngọc Thanh** | Kế hoạch 11 cấu hình × 30 seed, chạy thực nghiệm và xuất CSV/JSON (`src/n7_ngoc_thanh_thuc_nghiem.py`) |
 | **N8** | **Trang Bùi** | Thống kê `mean`/`SD`, phân tích cặp seed (`paired.csv`), chọn seed gần trung vị (`src/n8_trang_bui_thong_ke.py`) |
-| **N9** | **Trang Nguyễn** | Biểu đồ 1920×1080, vẽ đàn xám, ca gốc theo thời gian và benchmark (`src/n9_trang_nguyen_ve_hinh.py`) |
+| **N9** | **Trang Nguyễn** | Biểu đồ 1920×1080, vẽ đàn xám và ca gốc theo thời gian (`src/n9_trang_nguyen_ve_hinh.py`) |
 | **N10** | **Bảo Ngọc** | Giao diện Colab/Streamlit, phát lại quỹ đạo, tải hình/dữ liệu và tài liệu dự án (`src/n10_bao_ngoc_demo.py`, `app.py`, `demo_colab.ipynb`, `README.md`) |
 
 ---

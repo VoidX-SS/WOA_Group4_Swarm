@@ -7,13 +7,13 @@ Nhóm vẫn 11 người; Minh Nhân giữ vai trò S0. Mười module theo tên 
 | Minh Nhân | Chốt đề, đối chiếu tác giả, kiểm định, ghép và duyệt phạm vi kết luận |
 | Hoàng Tuấn | Hình học đoạn–bão, độ dài; cùng đọc ảnh clip/re-init và các đường ca gốc |
 | Quốc Phong | Pin và utility bão hòa; đọc mức từng trại, ý nghĩa và giới hạn mô hình |
-| Phúc Khang | Phiếu evaluate, valid, kiểm benchmark miền gốc, độc lập kiểm đường hợp lệ |
+| Phúc Khang | Phiếu evaluate, valid, độc lập kiểm đường hợp lệ (và lưu trữ benchmark trong Extra) |
 | Hoàng Yến | Ba bản đồ, 30 biến, giải mã đèn, ba lịch a; sơ đồ khối |
 | Quỳnh Ngân | Dịch ba nhánh theo WOA.m, đối chiếu cập nhật tại chỗ; ngách l |
 | Vân Lâm | Vòng lặp, các sổ, snapshot cả đàn; ngách giới hạn đèn và phép nhúng K6→K10 |
 | Ngọc Thanh | Kế hoạch 11 cấu hình, 30 seed, CSV từng lượt; thực nghiệm bản cơ sở |
 | Trang Bùi | Đọc CSV, mean/SD, cặp seed, quy tắc seed gần trung vị; giải thích bảng |
-| Trang Nguyễn | Ảnh 16:9 đủ thông tin, đàn xám, ca gốc theo thời gian và benchmark |
+| Trang Nguyễn | Ảnh 16:9 đủ thông tin, đàn xám và ca gốc theo thời gian |
 | Bảo Ngọc | Colab/Streamlit, N/T và ba bão, chạy/phát lại, tải hình/dữ liệu và kiểm giao diện |
 
 Gắn tên file là đối chiếu phần việc được giao. Lịch sử đóng góp, PR, review và mức hiểu bài cần được nhóm thực hiện thật. Mỗi bạn nên giải thích được: “Mình nhận gì từ phần trước, tính gì, trả gì cho phần sau?” rồi mở một đầu ra cụ thể.

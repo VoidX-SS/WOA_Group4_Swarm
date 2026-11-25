@@ -1,7 +1,7 @@
 """Những ví dụ nhỏ biết trước đáp án: python kiem_tra.py"""
 import random
 from src.n4_hoang_yen_du_lieu import load_problem, default_settings, decode, bounds, a_value
-from src.n3_phuc_khang_danh_gia import evaluate, evaluate_benchmark, crosses_gate
+from src.n3_phuc_khang_danh_gia import evaluate, crosses_gate
 from src.n5_quynh_ngan_buoc_woa import repair_population
 from src.n6_van_lam_woa import woa
 
@@ -32,15 +32,14 @@ def main():
     pop=[[-5,0.5,6]]
     repair_population(pop,[0,0,0],[1,1,1],"clip",random.Random(7))
     assert pop==[[0,0.5,1]]
-    s=default_settings();s["iterations"]=120
-    bench={"function":"sphere","dimensions":30,"lower":-100,"upper":100}
-    result=woa(evaluate_benchmark,bench,s)
-    assert result["evaluations"]==30*120
-    assert result["best_overall"]["evaluation"]["score"]<0.000001
-    repeat=woa(evaluate_benchmark,bench,s)
+    s=default_settings();s["iterations"]=50
+    uav_prob=load_problem("co_ban")
+    result=woa(evaluate,uav_prob,s)
+    assert result["evaluations"]==30*50
+    repeat=woa(evaluate,uav_prob,s)
     assert result["best_overall"]==repeat["best_overall"]
     assert result["history"]==repeat["history"]
-    print("Qua kiểm tra: khe có đường hợp lệ, bão, pin, 30 biến, số đèn, a, biên, seed và benchmark.")
+    print("Qua kiểm tra: khe có đường hợp lệ, bão, pin, 30 biến, số đèn, a, biên và tái lập seed.")
 
 
 if __name__=="__main__":

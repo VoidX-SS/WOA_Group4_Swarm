@@ -115,35 +115,13 @@ def build(output=None):
         save_figure(one_shot(samples, stats, names, group[1], subtitle), figures / filename)
         niche_sections.append((group[1], filename, "Best overall: số lần chính nghiệm có J thấp nhất đủ điều kiện. Có hợp lệ: đã từng có ít nhất một nghiệm hợp lệ."))
 
-    # Mở rộng phần benchmark bằng ảnh có thể chụp lên slide.
-    import csv
-    with open(output / "benchmark_summary.csv", encoding="utf-8-sig") as file:
-        benchmark = list(csv.DictReader(file))
-    fig, axes = plt.subplots(1, 2, figsize=(14, 5))
-    names = []
-    rates = []
-    rows = []
-    for row in benchmark:
-        names.append(row["function"])
-        rates.append(int(row["success_n"]))
-        rows.append([row["function"], row["success_n"] + "/" + row["n"], row["score_mean"]])
-    axes[0].bar(names, rates, color=["#6b9dbf", "#78b195", "#dcac65"])
-    axes[0].set_ylim(0, 35)
-    axes[0].set_ylabel("Seed đạt ngưỡng sai số")
-    axes[0].set_title("N=30 · T=500 · 30 seed · miền tọa độ gốc")
-    from src.n9_trang_nguyen_ve_hinh import table_on_axis
-    table_on_axis(axes[1], "Đáp án biết trước: f*=0", ["Bài", "Đạt đích", "f trung bình"], rows)
-    fig.tight_layout()
-    save_figure(fig, figures / "benchmark.png")
-
     css = "body{margin:0;background:#f5f4ef;color:#20394b;font:16px/1.6 system-ui}main{max-width:1300px;margin:auto;padding:28px}h1{font-size:38px}section{background:white;padding:24px;margin:24px 0;border-radius:14px}img{width:100%;height:auto}a{color:#246a4e}.lead{font-size:20px}"
-    body = "<h1>Đom Đóm · bản nhóm đã thu gọn</h1><p class='lead'>Ca gốc trước, bốn ngách sau. Toàn bộ hình có nguồn từ Python.</p>"
+    body = "<h1>Bài toán UAV · bản nhóm đã thu gọn</h1><p class='lead'>Ca gốc trước, bốn ngách sau. Toàn bộ hình có nguồn từ Python.</p>"
     body += "<p>Mở <b>demo_colab.ipynb</b> hoặc chạy <b>python -m streamlit run app.py</b> để điều khiển cả đàn. Trang này là kết quả đã lưu.</p>"
     body += "<p><b>Chốt:</b> 30 biến, pin 220, q=0.5, b=1, phạt bão/pin/map cố định, utility bão hòa, bỏ phạt gấp khúc.</p>"
     body += "<section><h2>Tổng quan các ca gốc · 30 seed/ca</h2><img src='results/figures/00_case_goc_tong_hop.png'></section>"
     for title, filename, note in sections:
         body += "<section><h2>" + html.escape(title) + "</h2><p>" + html.escape(note) + "</p><img loading='lazy' src='results/figures/" + filename + "'></section>"
-    body += "<section><h2>Kiểm chứng benchmark</h2><p>Quadratic 1 chiều; Sphere và Rastrigin 30 chiều. Ngưỡng: 1e-8, 1e-8, 1e-6. Không gọi f máy tính bằng 0 là chứng minh tối ưu tuyệt đối.</p><img src='results/figures/benchmark.png'></section>"
     body += "<h1>Bốn ngách đã chốt</h1>"
     for title, filename, note in niche_sections:
         body += "<section><h2>" + html.escape(title) + "</h2><p>" + html.escape(note) + "</p><img loading='lazy' src='results/figures/" + filename + "'></section>"
@@ -151,7 +129,7 @@ def build(output=None):
     import os
     prefix = Path(os.path.relpath(output, ROOT)).as_posix() + "/figures/"
     body = body.replace("results/figures/", prefix)
-    (ROOT / "MO_KET_QUA.html").write_text("<!doctype html><html lang='vi'><meta charset='utf-8'><meta name='viewport' content='width=device-width,initial-scale=1'><title>Đom Đóm</title><style>" + css + "</style><main>" + body + "</main></html>", encoding="utf-8")
+    (ROOT / "MO_KET_QUA.html").write_text("<!doctype html><html lang='vi'><meta charset='utf-8'><meta name='viewport' content='width=device-width,initial-scale=1'><title>Bài toán UAV</title><style>" + css + "</style><main>" + body + "</main></html>", encoding="utf-8")
     print("Đã tạo ảnh 16:9, ba ca gốc, sáu ảnh đối chứng cho bốn ngách và ba bản replay.")
 
 

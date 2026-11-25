@@ -15,7 +15,7 @@ Khi mở bản lưu, các số in ở phần kết quả là cấu hình của l
 
 ## Đã kiểm những gì?
 
-Đã kiểm ví dụ có đường qua khe, đoạn vi phạm bão, pin, K tối đa với 30 biến, lịch a theo t/T, clip, tái lập seed và benchmark. Bộ đầy đủ gồm 330 lượt ứng dụng và 90 benchmark, đã được chấm lại từ các mảng nghiệm. Toàn bộ final_population là đàn đã sửa biên và chấm, không phải bước mới chưa chấm cuối vòng.
+Đã kiểm ví dụ có đường qua khe, đoạn vi phạm bão, pin, K tối đa với 30 biến, lịch a theo t/T, clip và tái lập seed. Bộ đầy đủ gồm 330 lượt ứng dụng bài toán UAV đã được chấm lại từ các mảng nghiệm (phần kiểm chuẩn hàm toán học lưu riêng tại `Extra/benchmark/`). Toàn bộ final_population là đàn đã sửa biên và chấm, không phải bước mới chưa chấm cuối vòng.
 
 Giao diện Streamlit được kiểm bằng AppTest chính thức: đổi N/T/l, chạy form, kéo replay, đổi bản đồ, sửa bão và bật vẽ cả đàn trực tiếp. Các handler ipywidgets được gọi thử với N/T và bão mới, kiểm kết quả và replay. Đây là kiểm thử logic giao diện; việc hiển thị widget đặc thù vẫn nên mở thử trong một phiên Google Colab trên máy trình bày. Thư viện vẽ đã xuất và kiểm tra các ảnh 16:9.
 

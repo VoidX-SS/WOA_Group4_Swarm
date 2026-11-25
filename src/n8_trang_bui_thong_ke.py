@@ -160,41 +160,8 @@ def paired_rows(rows):
     return out
 
 
-def summarize_benchmarks(output):
-    rows = []
-    for path in sorted((Path(output) / "benchmarks").glob("*/seed_*.json")):
-        with open(path, encoding="utf-8") as file:
-            result = json.load(file)
-        problem = result["problem"]
-        report = result["best_overall"]["evaluation"]
-        square_distance = 0
-        for value in report["values"]:
-            optimum = 0
-            if problem["function"] == "quadratic":
-                optimum = 7
-            square_distance += (value - optimum) ** 2
-        rows.append({"function": problem["function"], "seed": result["settings"]["seed"],
-                     "dimensions": problem["dimensions"], "score": report["score"],
-                     "target": problem["target"], "success": int(report["score"] <= problem["target"]),
-                     "distance_to_known_optimum": math.sqrt(square_distance), "evaluations": result["evaluations"]})
-    save_csv(Path(output) / "benchmark_trials.csv", rows)
-    summary = []
-    for name in ["quadratic", "sphere", "rastrigin"]:
-        values = []
-        successes = 0
-        for row in rows:
-            if row["function"] == name:
-                values.append(row["score"])
-                successes += row["success"]
-        if values:
-            summary.append({"function": name, "n": len(values), "success_n": successes,
-                            "score_mean": average(values), "score_std": std(values)})
-    save_csv(Path(output) / "benchmark_summary.csv", summary)
-
-
 def summarize_folder(output):
     export_trials(output)
     rows = read_trials(output)
     save_csv(Path(output) / "summary.csv", summarize_rows(rows))
     save_csv(Path(output) / "paired.csv", paired_rows(rows))
-    summarize_benchmarks(output)

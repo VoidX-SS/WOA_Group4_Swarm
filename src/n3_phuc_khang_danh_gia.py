@@ -62,17 +62,3 @@ def evaluate(whale, problem):
     result.update(energy)
     result.update(signal)
     return result
-
-
-def evaluate_benchmark(whale, problem):
-    # whale đã ở miền thật [-100,100] hay [-5.12,5.12]. Đọc thẳng nhé.
-    score = 0
-    if problem["function"] == "quadratic":
-        score = (whale[0] - 7) * (whale[0] - 7)
-    elif problem["function"] == "sphere":
-        for value in whale:
-            score += value * value
-    else:
-        for value in whale:
-            score += value * value - 10 * math.cos(2 * math.pi * value) + 10
-    return {"score": score, "base_score": score, "valid": True, "values": whale.copy()}

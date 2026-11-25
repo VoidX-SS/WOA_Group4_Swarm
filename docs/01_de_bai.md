@@ -40,4 +40,4 @@ Hàm phạt hữu hạn không tạo bức tường tuyệt đối. Một đư�
 
 Đây là mô hình 2D tĩnh; chưa có gia tốc, góc quay vật lý, gió, độ cao, mất tín hiệu theo thời gian hoặc mô hình truyền sóng đã hiệu chuẩn. Vùng bão ràng buộc đường, không chặn tín hiệu. Đặt trùng đèn và điểm đường là điều đề hiện tại cho phép; không diễn giải chúng như bằng chứng UAV thật vận hành tốt.
 
-Ca A là bản đồ cơ bản. B là khe giữa hai bão có cổng x=40, y từ 47 đến 53, đồng thời vẫn cho phép đi vòng ngoài. C là các bão chắn giữa đường. Cả ba dùng pin 220. Vì đề chưa bắt buộc qua khe, một nghiệm đi vòng vẫn hợp lệ.
+Ca A là bản đồ cơ bản. B là khe giữa hai bão có cổng x=40, y từ 38 đến 62, đồng thời vẫn cho phép đi vòng ngoài. C là các bão chắn giữa đường. Cả ba dùng pin 220. Vì đề chưa bắt buộc qua khe, một nghiệm đi vòng vẫn hợp lệ.

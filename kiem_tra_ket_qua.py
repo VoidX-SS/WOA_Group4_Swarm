@@ -2,7 +2,7 @@
 import json
 import math
 from src.n4_hoang_yen_du_lieu import ROOT, bounds
-from src.n3_phuc_khang_danh_gia import evaluate, evaluate_benchmark
+from src.n3_phuc_khang_danh_gia import evaluate
 from src.n8_trang_bui_thong_ke import load_runs
 
 
@@ -68,17 +68,8 @@ def main():
     assert len(groups) == 11
     for name in groups:
         assert sorted(groups[name]) == list(range(1, 31))
-    benchmark_count = 0
-    for path in (ROOT / "results" / "benchmarks").glob("*/seed_*.json"):
-        result = json.loads(path.read_text())
-        fresh = evaluate_benchmark(result["best_overall"]["position"], result["problem"])
-        assert math.isclose(fresh["score"], result["best_overall"]["evaluation"]["score"], abs_tol=0.000000001)
-        assert fresh["score"] <= result["problem"]["target"]
-        assert result["evaluations"] == 15000
-        benchmark_count += 1
-    assert benchmark_count == 90
     print("Đã kiểm 330 lượt ứng dụng;", valid_count, "lượt có best_valid; các đường qua kiểm hình học độc lập.")
-    print("Đàn cuối là 30 mảng 30 biến trong miền; 90 benchmark đạt ngưỡng; số lượt chấm đúng.")
+    print("Đàn cuối là 30 mảng 30 biến trong miền; số lượt chấm đúng.")
 
 
 if __name__ == "__main__":

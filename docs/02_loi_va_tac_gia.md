@@ -32,11 +32,11 @@ Khi hết một lượt sửa, chưa chấm ngay. Đầu lượt kế tiếp, t�
 
 T bắt đầu từ t=0 đến T-1. Với N=30,T=800 có 24.000 lần chấm. Bước cập nhật cuối trong WOA.m không được chấm nữa, nên bản này cũng không đem đàn chưa chấm ấy báo thành kết quả. “Đàn cuối” trên ảnh là đàn cuối **đã được chấm**. Snapshot và sổ hợp lệ không tham gia thay công thức leader.
 
-## Vì sao benchmark cũ cần thay?
+## Vì sao benchmark cũ cần thay? (Đã chuyển lưu trữ sang `Extra/benchmark/`)
 
 WOA có `C*leader-x`. Nếu cùng dời mọi tọa độ một đoạn h, biểu thức bên trong sẽ có thêm `(C-1)*h`. Vậy dời gốc không chỉ đổi cách viết con số: nó có thể đổi bước tìm kiếm. Đưa Sphere/Rastrigin từ miền quanh 0 về 0..1 làm đáy chuyển sang 0.5, tạo ra một bài cài đặt khác với miền gốc tác giả dùng.
 
-Bộ mới chạy Sphere 30 chiều trong [-100,100] và Rastrigin 30 chiều trong [-5.12,5.12]. Cả hai đạt ngưỡng ở 30/30 seed với N=30,T=500. Đây là đạt ngưỡng sai số, không chứng minh giá trị chính xác toàn cục trong mọi lần chạy. Việc kiểm riêng đổi miền, giữ nguyên toán tử, được lưu ở gói cá nhân. Riêng bài UAV có miền bắt đầu từ 0; đổi đơn vị bằng nhân hệ số dương không gây cùng vấn đề dời gốc như benchmark ấy.
+Phần kiểm chứng nội bộ này đã được tách riêng vào `Extra/benchmark/` (Quadratic 1 chiều trong `[-20, 20]`, Sphere 30 chiều trong `[-100, 100]`, Rastrigin 30 chiều trong `[-5.12, 5.12]`, đạt ngưỡng 30/30 seed ở $N=30, T=500$) và không đưa vào báo cáo so sánh chính trên bài toán UAV. Riêng bài UAV có miền bắt đầu từ 0; đổi đơn vị bằng nhân hệ số dương không gây cùng vấn đề dời gốc như các hàm đối xứng quanh 0.
 
 ## Sơ đồ lõi
 

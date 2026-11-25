@@ -1,9 +1,8 @@
 {
   "release": "2026-11-01-v2",
-  "project": "WOA_Dom_Dom",
+  "project": "WOA_UAV",
   "counts": {
-    "application_runs": 330,
-    "benchmark_runs": 90
+    "application_runs": 330
   },
   "seed_set": [
     1,

@@ -8,7 +8,7 @@ import csv
 import json
 from pathlib import Path
 from src.n4_hoang_yen_du_lieu import ROOT, load_problem, default_settings
-from src.n3_phuc_khang_danh_gia import evaluate, evaluate_benchmark
+from src.n3_phuc_khang_danh_gia import evaluate
 from src.n6_van_lam_woa import woa
 
 
@@ -119,32 +119,13 @@ def run_paths(output, seeds, population, iterations, only):
                   "qua khe", result["best_gate"] is not None, flush=True)
 
 
-def run_benchmarks(output, seeds):
-    functions = [
-        {"function": "quadratic", "dimensions": 1, "lower": -20, "upper": 20, "target": 0.00000001},
-        {"function": "sphere", "dimensions": 30, "lower": -100, "upper": 100, "target": 0.00000001},
-        {"function": "rastrigin", "dimensions": 30, "lower": -5.12, "upper": 5.12, "target": 0.000001},
-    ]
-    for problem in functions:
-        for seed in range(1, seeds + 1):
-            settings = default_settings()
-            settings["seed"] = seed
-            settings["iterations"] = 500
-            result = woa(evaluate_benchmark, problem, settings)
-            result["final_population"] = []
-            result["history"] = []
-            save_json(output / "benchmarks" / problem["function"] / ("seed_" + str(seed).zfill(2) + ".json"), result)
-            print("benchmark", problem["function"], seed, flush=True)
-
-
 def main():
     parser = argparse.ArgumentParser()
     parser.add_argument("--output", default=str(ROOT / "results"))
     parser.add_argument("--seeds", type=int, default=30)
-    parser.add_argument("--population", type=int, default=30, help="Cỡ đàn bài bay; benchmark cố định N=30.")
-    parser.add_argument("--iterations", type=int, default=800, help="Lượt bài bay; benchmark cố định T=500.")
+    parser.add_argument("--population", type=int, default=30, help="Cỡ đàn bài bay.")
+    parser.add_argument("--iterations", type=int, default=800, help="Lượt bài bay.")
     parser.add_argument("--only", default="")
-    parser.add_argument("--suite", choices=["path", "benchmark", "all"], default="all")
     parser.add_argument("--no-summary", action="store_true")
     args = parser.parse_args()
     output = Path(args.output)
@@ -159,10 +140,7 @@ def main():
         for name in only:
             if name not in known:
                 parser.error("Không có cấu hình " + name + ". Xem experiment_plan trong n7 nhé.")
-    if args.suite in ["path", "all"]:
-        run_paths(output, args.seeds, args.population, args.iterations, only)
-    if args.suite in ["benchmark", "all"]:
-        run_benchmarks(output, args.seeds)
+    run_paths(output, args.seeds, args.population, args.iterations, only)
     if not args.no_summary:
         export_trials(output)
         from src.n8_trang_bui_thong_ke import summarize_folder
