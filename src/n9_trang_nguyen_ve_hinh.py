@@ -87,7 +87,7 @@ def plot_population(problem, report, population, title="", alpha=0.1):
 
 def text_number(value):
     if value is None:
-        return "—"
+        return ", "
     return str(round(float(value), 3))
 
 
@@ -126,7 +126,7 @@ def one_shot(results, summaries, labels, title, subtitle=""):
         errors.append(row["utility_sat_std"] or 0)
         utility_rows.append([labels[i], text_number(row["utility_sat_mean"]),
                              text_number(row["utility_sat_std"]), text_number(row["minimum_service_mean"])])
-        gate = "—"
+        gate = ", "
         if "gate" in results[i]["problem"]:
             gate = str(row["gate_found_n"]) + "/" + str(row["n"])
         valid_rows.append([labels[i], str(row["valid_n"]) + "/" + str(row["n"]),

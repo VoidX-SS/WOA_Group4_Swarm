@@ -1,4 +1,4 @@
-"""Kiểm chứng hàm chuẩn (Quadratic 1D, Sphere 30D, Rastrigin 30D) — lưu trữ tại Extra/benchmark/.
+"""Kiểm chứng hàm chuẩn (Quadratic 1D, Sphere 30D, Rastrigin 30D) ,  lưu trữ tại Extra/benchmark/.
 
 Chạy kiểm tra dữ liệu đã lưu: python Extra/benchmark/benchmark_suite.py --verify
 Chạy lại 90 lượt benchmark:       python Extra/benchmark/benchmark_suite.py --run

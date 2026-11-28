@@ -66,7 +66,7 @@ def notebook_live(snapshot, overall, valid):
     if archive is None:
         archive = overall
     clear_output(wait=True)
-    print("Đang chạy lượt", snapshot["iteration"], "— xám là toàn bộ đàn.")
+    print("Đang chạy lượt", snapshot["iteration"], ",  xám là toàn bộ đàn.")
     fig = plot_population(PANEL["running_problem"], archive["evaluation"], snapshot["population"],
                           "Đàn đang tìm", 0.12)
     display(fig)
