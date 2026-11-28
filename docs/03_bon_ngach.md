@@ -20,7 +20,7 @@ A: clip 29/30, re-init 30/30, U khoảng 0.659 và 0.823. B: clip 30/30, re-init
 
 Cả ba có 30/30 lượt hợp lệ. U khoảng 0.558,0.555,0.546. Không có một lợi thế utility lớn trong bộ này. Số seed từng qua khe lần lượt 2,1,4. Các chênh lệch ấy nhỏ, nên báo như thống kê mô tả chứ không gọi là thắng chắc. Ngách này giúp nhóm trình bày được một kết quả gần đối chứng, không ép đồ thị kể câu chuyện đẹp.
 
-## 4. Giới hạn số đèn phát — giữ nguyên 30 biến
+## 4. Giới hạn số đèn phát ,  giữ nguyên 30 biến
 
 Vì yêu cầu giữ 30 chiều, bản mới không còn đổi 6/10/14 điểm trung gian. Mình giữ 10 điểm đường và 10 biến pin, rồi chỉ cho tối đa K=6/8/10 đèn được nhận pin. Lấy K đề xuất pin lớn nhất; phần còn lại tắt. Do đèn có thể nhận pin 0, hiểu đây là số đèn **tối đa**, không buộc tất cả phải phát.
 

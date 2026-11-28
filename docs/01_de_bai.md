@@ -1,4 +1,4 @@
-# Đề bài Đom Đóm — bản chốt thu gọn
+# Đề bài Đom Đóm ,  bản chốt thu gọn
 
 Một UAV đi từ S=(0,50) đến T=(100,50) trong bản đồ giả định 100×100. UAV mang các thiết bị phát tín hiệu, gọi gần gũi là đom đóm, để hỗ trợ 8 trại có trọng số nhu cầu khác nhau. Trên đường có ba vùng cấm hình tròn và biên an toàn 2 đơn vị. Một túi năng lượng 220 được dùng chung cho bay và vận hành thiết bị trong một khoảng thời gian đã quy ước.
 
